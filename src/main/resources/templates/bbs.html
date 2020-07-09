@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/article/postArticle}" th:object="${articleForm}" method="post">
+		<div th:errors="*{name}" style="color: red;"></div>
+		投稿者名: <input type="text" name="name" th:field="*{name}"><br>
+		<div th:errors="*{content}" style="color: red;"></div>
+		投稿内容: <textarea rows="10" cols="30" name="content" th:field="*{content}"></textarea><br>
+		<br><button>記事投稿</button><br>
+	</form>
+
+	<br>
+	<hr>
+
+	<div th:each="article : ${articles}">
+		投稿者名: <span th:text="${article.name}">name</span><br>
+		投稿内容: <br>
+		<pre th:text="${article.content}">content</pre>
+
+		<br>
+		<form th:action="@{/article/delete}" method="post">
+			<input type="hidden" name="articleId" th:value="${article.id}">
+			<button>記事削除</button>	
+			<button type="button" th:id="'good_' + ${article.id}" style="display: inline-block;" value="0">♡</button>
+			<div th:id="'good_counter_' + ${article.id}" style="display: inline-block;">0</div>
+			<span th:text="${session.article.id}"></span>
+		</form>
+
+		<br>
+
+		<div th:each="comment : ${article.commentList}">
+			コメント者名: <span th:text="${comment.name}">commentName</span><br>
+			コメント内容: <br>
+			<pre th:text="${comment.content}">commentContent</pre>
+		</div>
+		
+		<form th:action="@{/article/postComment}" th:object="${commentForm}" method="post">
+			<div th:if="${article.id} == *{articleId}" th:errors="*{name}" style="color: red;"></div>
+			名前: <br>
+			<input type="text" th:field="*{name}"><br>
+			<div th:if="${article.id} == *{articleId}" th:errors="*{content}" style="color: red;"></div>
+			コメント: <br>
+			<textarea rows="10" cols="30" th:field="*{content}"></textarea><br>
+			<br>
+			<button>コメント投稿</button>
+			<input type="hidden" name="articleId" th:value="${article.id}">
+		</form>
+		
+		<hr>
+	</div>
+                                                                                                                                           
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script th:src="@{/js/Ex04.js}"></script>
+</body>
+</html>
