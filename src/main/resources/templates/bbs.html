@@ -38,7 +38,7 @@
 			<pre th:text="${comment.content}">commentContent</pre>
 		</div>
 		
-		<form th:action="@{/article/postComment}" th:object="${commentForm}" method="post">
+		<form th:action="@{/article/insertComment}" th:object="${commentForm}" method="post">
 			<div th:if="${article.id} == *{articleId}" th:errors="*{name}" style="color: red;"></div>
 			名前: <br>
 			<input type="text" th:field="*{name}"><br>
