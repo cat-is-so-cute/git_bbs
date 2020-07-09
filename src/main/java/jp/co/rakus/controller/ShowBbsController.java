@@ -14,13 +14,11 @@ import jp.co.rakus.repository.ArticleRepository;
 @RequestMapping("")
 public class ShowBbsController {
 	@Autowired
-	ArticleRepository repository;
+	private ArticleRepository repository;
 	
 	public String index(Model model) {
-		List<Article> articles = repository.findAll();
-		
-		model.addAttribute("articles", articles);
-		
+		List<Article> articleList = repository.findAll();
+		model.addAttribute("articleList", articleList);
 		return "bbs";
 	}
 }
