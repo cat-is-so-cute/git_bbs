@@ -2,7 +2,7 @@ package jp.co.rakus.form;
 
 import javax.validation.constraints.NotBlank;
 
-public class ArticleFrom {
+public class ArticleForm {
 	@NotBlank(message = "名前が未入力です")
 	private String name;
 	@NotBlank(message = "投稿内容が未入力です")
@@ -23,5 +23,4 @@ public class ArticleFrom {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
 }

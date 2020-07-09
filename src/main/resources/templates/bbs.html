@@ -27,7 +27,7 @@
 			<button>記事削除</button>	
 			<button type="button" th:id="'good_' + ${article.id}" style="display: inline-block;" value="0">♡</button>
 			<div th:id="'good_counter_' + ${article.id}" style="display: inline-block;">0</div>
-			<span th:text="${session.article.id}"></span>
+<!-- 			<span th:text="${session.article.id}"></span> -->
 		</form>
 
 		<br>
@@ -39,10 +39,10 @@
 		</div>
 		
 		<form th:action="@{/article/insertComment}" th:object="${commentForm}" method="post">
-			<div th:if="${article.id} == *{articleId}" th:errors="*{name}" style="color: red;"></div>
+<!-- 			<div th:if="${article.id} == *{articleId}" th:errors="*{name}" style="color: red;"></div> -->
 			名前: <br>
 			<input type="text" th:field="*{name}"><br>
-			<div th:if="${article.id} == *{articleId}" th:errors="*{content}" style="color: red;"></div>
+<!-- 			<div th:if="${article.id} == *{articleId}" th:errors="*{content}" style="color: red;"></div> -->
 			コメント: <br>
 			<textarea rows="10" cols="30" th:field="*{content}"></textarea><br>
 			<br>

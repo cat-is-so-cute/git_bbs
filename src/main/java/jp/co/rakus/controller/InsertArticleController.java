@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.rakus.domain.Article;
-import jp.co.rakus.form.ArticleFrom;
+import jp.co.rakus.form.ArticleForm;
 import jp.co.rakus.repository.ArticleRepository;
 
 @Controller
-@RequestMapping("/insert")
+@RequestMapping("/article")
 public class InsertArticleController {
 	@Autowired
 	private ArticleRepository repository;
@@ -22,10 +22,6 @@ public class InsertArticleController {
 	@Autowired
 	private ShowBbsController showBbsController;
 	
-	@ModelAttribute
-	public ArticleFrom setUpArticleForm() {
-		return new ArticleFrom();
-	}
 	
 	/**
 	 * 記事を投稿する.
@@ -33,8 +29,8 @@ public class InsertArticleController {
 	 * @param form 記事投稿フォーム
 	 * @return 掲示板画面
 	 */
-	@RequestMapping("")
-	public String insertArticle(@Validated ArticleFrom form, BindingResult result, Model model) {
+	@RequestMapping("/postArticle")
+	public String insertArticle(@Validated ArticleForm form, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return showBbsController.index(model);
 		}
